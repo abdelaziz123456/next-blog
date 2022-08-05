@@ -4,43 +4,31 @@ import { Fragment } from "react";
 import FeaturedPosts from "../Components/home-page/FeaturedPosts";
 import Hero from "../Components/home-page/Hero";
 import styles from "../styles/Home.module.css";
+import {getFeaturedPosts} from "../libs/post-util";
 
-const DUMMY_POSTS = [
-  {
-    slug :'getting-started-with-nextjs',
-    title:'Getting Started With Nextjs',
-   
-    image:'getting-started-nextjs.png',
-    excerpt:'NextJS is a React framework for production- it makes building fullstack React apps and sites a breeze and ships with build-in SSR ',
-    date:'2022-02-10',
-  },  {
-    slug :'getting-started-with-nextjs2',
-    title:'Getting Started With Nextjs',
-   
-    image:'getting-started-nextjs.png',
-    excerpt:'NextJS is a React framework for production- it makes building fullstack React apps and sites a breeze and ships with build-in SSR ',
-    date:'2022-02-10',
-  },  {
-    slug :'getting-started-with-nextjs3',
-    title:'Getting Started With Nextjs',
-   
-    image:'getting-started-nextjs.png',
-    excerpt:'NextJS is a React framework for production- it makes building fullstack React apps and sites a breeze and ships with build-in SSR ',
-    date:'2022-02-10',
-  },  {
-    slug :'getting-started-with-nextjs4',
-    title:'Getting Started With Nextjs',
-   
-    image:'getting-started-nextjs.png',
-    excerpt:'NextJS is a React framework for production- it makes building fullstack React apps and sites a breeze and ships with build-in SSR ',
-    date:'2022-02-10',
-  },
-];
-export default function Home() {
+
+export default function Home(props) {
   return (
     <Fragment>
+      <Head>
+        <title>Welcome to my blog</title>
+        <meta name='description' content="I post about frontend development "/>
+      </Head>
       <Hero />
-      <FeaturedPosts posts={DUMMY_POSTS} />
+      <FeaturedPosts posts={props.posts} />
     </Fragment>
   );
+}
+
+
+
+export function getStaticProps(){
+    const featuredPosts=getFeaturedPosts();
+
+    return {
+        props:{
+            posts:featuredPosts
+        },
+
+    }
 }
